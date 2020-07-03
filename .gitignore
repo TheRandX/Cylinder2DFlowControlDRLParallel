@@ -151,3 +151,10 @@ crashlytics-build.properties
 fabric.properties
 
 .DS_Store
+.vsls.json
+
+# Input/Output data
+*/env*/
+*/mesh/
+*/saved_models/
+*/episode_averages/
