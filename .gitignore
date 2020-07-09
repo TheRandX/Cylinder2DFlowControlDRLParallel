@@ -155,6 +155,7 @@ fabric.properties
 
 # Input/Output data
 */env*/
+*/saver_data/
 */mesh/
 */saved_models/
 */episode_averages/
