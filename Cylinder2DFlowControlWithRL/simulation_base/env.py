@@ -97,7 +97,7 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
                         "single_run":single_run
                         }
 
-    reward_function = 'drag_plain_lift'
+    reward_function = 'drag_avg_mass_flow'
 
     verbose = 0  # For detailed output (see Env2DCylinder)
 
@@ -147,6 +147,11 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
         next_param = 'lift'
     elif reward_function == 'drag_avg_abs_lift':
         next_param = 'avgAbsLift'
+    elif reward_function == 'drag_avg_mass_flow':
+        next_param = 'avgQ'
+    else:
+        next_param = ''
+
     simu_name = '_'.join([simu_name, next_param])
 
     # Pass parameters to the Environment class

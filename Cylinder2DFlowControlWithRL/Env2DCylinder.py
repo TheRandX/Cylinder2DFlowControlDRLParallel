@@ -320,7 +320,7 @@ class Env2DCylinder(Environment):
             # If random_start == True, let's start in a random position of the vortex shedding
             if self.optimization_params["random_start"]:
                 rd_advancement = np.random.randint(1712)  # 1712 is the number of steps of a shedding period. Needs to be hardcoded
-                for j in range(rd_advancement):
+                for _ in range(rd_advancement):
                     self.flow.evolve(self.Qs)
                 print("Simulated {} iterations before starting the control".format(rd_advancement))
 
@@ -884,7 +884,7 @@ class Env2DCylinder(Environment):
         return(next_state, terminal, reward)
 
     def compute_reward(self):
-        mean_drag_no_control = - self.inspection_params['line_drag']
+        mean_drag_no_control = -self.inspection_params['line_drag']
 
         # NOTE: reward should be computed over the whole number of iterations in each execute loop
         if self.reward_function == 'plain_drag':  # a bit dangerous, may be injecting some momentum
@@ -909,6 +909,11 @@ class Env2DCylinder(Environment):
             avg_abs_lift = np.mean(np.absolute(self.history_parameters["lift"].get()[-avg_length:]))
             avg_drag = np.mean(self.history_parameters["drag"].get()[-avg_length:])
             return avg_drag + mean_drag_no_control - 0.2 * avg_abs_lift
+        elif self.reward_function == 'drag_avg_mass_flow':
+            avg_length = min(500, self.number_steps_execution)
+            avg_drag = np.mean(self.history_parameters["drag"].get()[-avg_length:])
+            avg_Qs = np.sqrt(np.mean((self.history_parameters["jet_0"].get()[-avg_length:])**2))
+            return avg_drag + mean_drag_no_control - 20 * avg_Qs / avg_drag
 
         # TODO: implement some reward functions that take into account how much energy / momentum we inject into the flow
 
