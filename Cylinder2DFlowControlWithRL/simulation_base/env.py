@@ -84,7 +84,7 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
                         "zero_net_Qs": True,  # True for Q1 + Q2 = 0
                         "random_start": random_start}
 
-    inspection_params = {"plot": 100,
+    inspection_params = {"plot": plot,
                         "dump_vtu": dump_vtu,
                         "dump_debug": dump_debug,
                         "dump_CL": dump_CL,

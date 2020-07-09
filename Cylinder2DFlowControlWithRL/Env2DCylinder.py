@@ -480,7 +480,6 @@ class Env2DCylinder(Environment):
         if(not self.initialized_visualization and self.inspection_params["plot"] != False):
             plt.ion()  # Turn the interactive plot mode on
             plt.subplots(total_number_subplots, 1)
-            plt.show()
             # ax.set_xlim([0, self.nbr_points_animate_plot])
             # ax.set_ylim([0, 1024])
             print("Dynamic plotting turned on")

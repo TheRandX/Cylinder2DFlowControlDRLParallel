@@ -66,9 +66,10 @@ if __name__ == '__main__':  # This is only run when this file is executed as a s
 
     parser = argparse.ArgumentParser(description='Generate msh file from GMSH',  # Text to display before the argument help
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter) # adds information about default values to each of the argument help messages
+
+    parser.add_argument('input', type=str, help='input msh file')
     # Optional output geo file
     parser.add_argument('-output', default='', type=str, help='A geofile for writing out geometry')
-
     # Geometry
     parser.add_argument('-jets_toggle', default=1, type=bool,
                         help='toggle Jets --> 0 : No jets, 1: Yes jets')
@@ -104,7 +105,7 @@ if __name__ == '__main__':  # This is only run when this file is executed as a s
     args = parser.parse_args()
 
     # Using geometry_2d.geo to produce geometry_2d.msh
-    sys.exit(generate_mesh(args.__dict__))
+    sys.exit(generate_mesh(args.__dict__, args['input']))
 
     # FIXME: inflow profile
     # FIXME: test with turek's benchmark
